@@ -38,3 +38,10 @@ Once complete, you will see the osCommerceDemo virtual box listed. Hit the Green
 If you you would like to increase the desktop view of the VirtualBox, click on the Gear icon on the top right of the Ubuntu instance. When the System Settings window opens, click on Displays. From here click on your preferred resolution and click apply. The resolution will then change. Click on “Keep This Configuration” to save changes. This will give you more screen space in case the default 800x600 (4:3) resolution was too small.
 ![](/Lab100/images/5.png)
 ![](/Lab100/images/6.png)
+
+### Step 2. Install and Setup LAMP (Linux, Apache, MySQL, PHP) & SSH
+*Verify Internet Connection*
+Before installing any of the packages on the Ubuntu image on VirtualBox, make sure that you are connected to the public internet. Shut down the virtual machine, then disable/turn off any VPN applications/programs, then start up the Ubuntu Virtual machine. This will allow the Ubuntu Virtual Machine to download and install Linux packages.
+
+*Install MySQL5*
+Run this terminal command to install MySQL
