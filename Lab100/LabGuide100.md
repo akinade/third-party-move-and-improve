@@ -44,4 +44,10 @@ If you you would like to increase the desktop view of the VirtualBox, click on t
 Before installing any of the packages on the Ubuntu image on VirtualBox, make sure that you are connected to the public internet. Shut down the virtual machine, then disable/turn off any VPN applications/programs, then start up the Ubuntu Virtual machine. This will allow the Ubuntu Virtual Machine to download and install Linux packages.
 
 *Install MySQL5*
-Run this terminal command to install MySQL
+Run this terminal command to install MySQL: ```sudo apt-get install mysql-server mysql-client```
+
+You will be asked to provide a password for the MySQL “root” user – this password is valid for the user root@localhost as well as root@server1.example.com, so we don't have to specify a MySQL root password manually later on. NOTE: Write this password down. You will need it for multiple parts of the lab going forward.
+
+Run this command to complete the installation: ```mysql_secure_installation```
+
+After running the command you will also be asked to answer prompts within the terminal window. Enter the following below where the password is the one you just set:
