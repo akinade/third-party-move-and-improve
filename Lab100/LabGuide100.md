@@ -24,5 +24,5 @@ Estimated time to complete this lab is three hours.
 ## Part 1. Capturing a Snapshot of Third Party OS Commerce Application
 ### Step 1: Download VirtualBox and Import Ubuntu Instance
 If you do not have it on your local machine, make sure to download [VirtualBox](https://www.virtualbox.org/wiki/Downloads). VirtualBox is a free, open-source software that allows users to run multiple operating systems on a single machine and switch between OS Instances. Additionally, download the osCommerceDemo.ova file that will be provided to you by your lab facilitator.
-![](/images/1.png)
+![](/Lab100/images/1.png)
 test
