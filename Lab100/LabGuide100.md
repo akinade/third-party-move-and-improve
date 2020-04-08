@@ -31,3 +31,10 @@ Open Virtualbox and click File > Import Applicance. Select the .ova file downloa
 
 Double check that your settings match the screenshot below. Once confirmed, click the import button. This process should take approximately 5 minutes.
 ![](/Lab100/images/3.png)
+
+Once complete, you will see the osCommerceDemo virtual box listed. Hit the Green Start Arrow and you will be prompted with a login screen with username *oscommerce*. the Default password is *oscommerce*. Once logged in you may or may not be prompted to update to Ubuntu 16.04.6. Click on “Don’t Upgrade”. You have now successfully imported Ubuntu to VirtualBox that we will now use to initialize our osCommerce application.
+![](/Lab100/images/4.png)
+
+If you you would like to increase the desktop view of the VirtualBox, click on the Gear icon on the top right of the Ubuntu instance. When the System Settings window opens, click on Displays. From here click on your preferred resolution and click apply. The resolution will then change. Click on “Keep This Configuration” to save changes. This will give you more screen space in case the default 800x600 (4:3) resolution was too small.
+![](/Lab100/images/5.png)
+![](/Lab100/images/6.png)
