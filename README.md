@@ -25,4 +25,9 @@ Attached below is a sample architecture of the final solution:
 * A cloud tenancy where you have the resources available to provision an ADW instance with 2 OCPUs, an OAC instance with 2 OCPUs, and an ODA instance.
 * Oracle Cloud Infrastructure supports the following browsers and versions: Google Chrome 69 or later, Safari 12.1 or later, Firefox 62 or later.
 
-## Trial Sign-Up  
+## Free Account Sign-Up
+* Bookmark this page for future reference.
+* Please click on the URL to receive your ![Free Account](https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ex:tb:::RC_NAMK190227P00084:PredictDemandML_ADW_HOL&SC=:ex:tb:::RC_NAMK190227P00084:PredictDemandML_ADW_HOL&pcode=NAMK190227P00084) and complete all required steps. When you complete the registration process you'll receive a $300 credit that will enable you to complete the lab for free. Additionally, you'll have 1000s of hours left over to continue to explore the Oracle Cloud.
+* Soon after requesting your trial you will receive an activation email. Once that email is received and you have logged in to your environment you can begind the lab.
+
+Access the labs using our web-friendly interface here ![PLACEHOLDER FOR SITE](www.oracle.com)  
