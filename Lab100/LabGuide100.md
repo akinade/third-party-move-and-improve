@@ -14,3 +14,7 @@ This lab walks you through the steps to capture an image of an existing, on-prem
 * Estimated time to complete this lab is three hours.
 
 ### Additional Resources
+* To learn about provisioning Networks and Network Security check out this [link](https://docs.cloud.oracle.com/en-us/iaas/Content/Network/Concepts/overview.htm)
+* To learn about Object Storage in the cloud please see the following [link](https://docs.cloud.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm)
+
+## Part 1. Capturing a Snapshot of Third Party OS Commerce Application
