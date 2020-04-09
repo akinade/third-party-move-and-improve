@@ -58,3 +58,11 @@ Disallow Root Login Remotely? Y
 Remove test database and access to it? Y
 Reload Privilege Tables now? Y
 ```
+
+*Install Apache2*
+Run this command within the terminal on VNC Viewer:
+```
+sudo apt-get install apache2
+```
+If you direct your browser to localhost you will see the Apache2 placeholder page.
+![](/Lab100/images/7.png "")
