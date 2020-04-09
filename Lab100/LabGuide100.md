@@ -104,9 +104,45 @@ FLUSH PRIVILEGES;
 Exit with Control + C
 
 **Configure Ubuntu for SSH Connections**
+
 Setup SSH:
 ```
 sudo apt-get install openssh-server sudo
 apt-get install ssh
 ```
 Install the below package to save persistent iptables updates. Select 'Yes' to save Firewall rules.
+```
+sudo apt-get install iptables-persistent
+```
+allow SSH Connection:
+```
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+```
+Check your iptables is updated with SSH access rules & save the updated rules:
+```
+sudo iptables -L
+sudo invoke-rc.d iptables-persistent save
+```
+![](/Lab100/images/8.png "")
+
+### Step 3: OSCommerce Setup
+**Download OSCommerce**
+Make a temporary folder named “tmp” where you will download osCommerce to. Download the zip and extract:
+```
+mkdir tmp
+cd /tmp/ && wget http://www.oscommerce.com/files/oscommerce-2.3.4.zip
+unzip oscommerce-2.3.4.zip
+```
+Next, run the commands below to copy osCommerce content to the default root directory for Apache2. You can choose to customize Apache2 root directory, but for this post, we’re going to use the default location which is at /var/www/html
+
+```
+sudo cp -rf oscommerce-2.3.4/* /var/www/html/
+```
+Change permissions on the files and give apache2 ownership of the root directory. Restart Apache:
+```
+sudo chmod 777 /var/www/html/catalog/includes/configure.php
+sudo chmod 777 /var/www/html/catalog/admin/includes/configure.php
+sudo chown www-data:www-data -R /var/www/html/
+sudo service apache2 start
+```
