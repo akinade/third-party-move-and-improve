@@ -40,10 +40,12 @@ If you you would like to increase the desktop view of the VirtualBox, click on t
 ![](/Lab100/images/6.png "")
 
 ### Step 2. Install and Setup LAMP (Linux, Apache, MySQL, PHP) & SSH
-*Verify Internet Connection*
+**Verify Internet Connection**
+
 Before installing any of the packages on the Ubuntu image on VirtualBox, make sure that you are connected to the public internet. Shut down the virtual machine, then disable/turn off any VPN applications/programs, then start up the Ubuntu Virtual machine. This will allow the Ubuntu Virtual Machine to download and install Linux packages.
 
-*Install MySQL5*
+**Install MySQL5**
+
 Run this terminal command to install MySQL: ```sudo apt-get install mysql-server mysql-client```
 
 You will be asked to provide a password for the MySQL “root” user – this password is valid for the user root@localhost as well as root@server1.example.com, so we don't have to specify a MySQL root password manually later on. NOTE: Write this password down. You will need it for multiple parts of the lab going forward.
@@ -59,7 +61,8 @@ Remove test database and access to it? Y
 Reload Privilege Tables now? Y
 ```
 
-*Install Apache2*
+**Install Apache2**
+
 Run this command within the terminal on VNC Viewer:
 ```
 sudo apt-get install apache2
