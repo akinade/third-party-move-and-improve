@@ -149,12 +149,16 @@ sudo service apache2 start
 
 Open firefox and navigate to localhost/catalog. You should see the setup wizard; all steps in this installation need to be completed before we can move on. Follow screenshots below to make sure settings are consistent.
 ![](/Lab100/images/9.png "")
+
 Start the new installation and log in to the MySQL database using the credentials cerated earlier. If values differ from those in the screenshot, please make sure you enter them appropriately.
 ![](/Lab100/images/10.png "")
+
 Set where the www address and web server root directory should be saved
 ![](/Lab100/images/11.png "")
+
 Finally, set the OSCommerce online store settings info. We recommend that you make a note of the administrator username and password for later reference.
 ![](/Lab100/images/12.png "")
+
 After installation, remove the installation directory to protect your site and change the permissions on sensitive files:
 ```
 sudo rm -rf /var/www/html/catalog/install
