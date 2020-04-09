@@ -71,6 +71,7 @@ If you direct your browser to localhost you will see the Apache2 placeholder pag
 ![](/Lab100/images/7.png "")
 
 **Install PHP5**
+
 Install PHP5 and Apache PHP5 modules with the command below:
 ```
 sudo apt-get install php5 libapache2-mod-php5 php-mysql
@@ -90,3 +91,5 @@ Create a database named oscommerce:
 ```
 CREATE DATABASE oscommerce;
 ```
+
+create a database user named ```oscommerceuser ```. Replace ```type_password_here ``` with a password of your choice. In this example we used ```oscommerce ``` as our password for the sake of simplicity. Regardless of what you choose it is highly recommended that you **copy down your password** as you will need it for other portions of the lab. 
