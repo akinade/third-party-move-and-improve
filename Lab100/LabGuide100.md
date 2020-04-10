@@ -252,3 +252,10 @@ Copy the pre-authenticated request URL. This will be used later when creating th
 ![](/Lab100/images/34.png "")
 
 ## Part 3: Create Custom Image and Instance
+From the top left hamburger menu, locate “Compute” and select “Custom Images” from the
+drop down.Click the blue button and select "Import Image"
+
+![](/Lab100/images/35.png "")
+![](/Lab100/images/36.png "")
+
+Select which compartment the image will be created in (if dedicated compartment was created, choose this one). Name the image & Select Linux for the operating system. Paste the Pre-Authenticated Request URL that was copied in the last step into the Object Storage URL field. Leave the default image type (VMDK) and Launch Mode (Paravirtualized)
