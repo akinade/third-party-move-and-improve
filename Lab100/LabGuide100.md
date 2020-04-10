@@ -128,6 +128,7 @@ sudo invoke-rc.d iptables-persistent save
 
 ### Step 3: OSCommerce Setup
 **Download OSCommerce**
+
 Make a temporary folder named “tmp” where you will download osCommerce to. Download the zip and extract:
 ```
 mkdir tmp
@@ -172,6 +173,7 @@ Type localhost/catalog/admin in the address bar of the firefox browser you had o
 ![](/Lab100/images/14.png "")
 
 **Create a New Manufacturer, Category & Product**
+
 When logged in, click on “Catalog” on the right-hand menu and click on “Manufactures”. On the next page, click on “Insert” and proceed to enter “Oracle” as the Manufacturer Name and upload an image of the Oracle logo (you can download one by using the firefox browser and saving it locally).  Click save when complete. You will then see Oracle as a listed Manufacturer with the image you uploaded.
 ![](/Lab100/images/15.png "")
 
@@ -185,6 +187,7 @@ Navigate to localhost/catalog/index.php. This is what you should see as a final 
 ![](/Lab100/images/18.png "")
 
 ### Step 5: Export .Ova File From VirtualBox & Extract VMDK
+
 From VirtualBox, shut down the osCommerce image (quitting out will also do this). Export the appliance from VirtualBox. Copy as seen in the image and set the file location for the .ova export. Keep in mind of the directory you are exporting to. Export will take about 5 minutes.
 ![](/Lab100/images/19.png "")
 ![](/Lab100/images/20.png "")
