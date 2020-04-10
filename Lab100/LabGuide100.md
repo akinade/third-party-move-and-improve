@@ -252,6 +252,7 @@ Copy the pre-authenticated request URL. This will be used later when creating th
 ![](/Lab100/images/34.png "")
 
 ## Part 3: Create Custom Image and Instance
+### Step 1: Import the image
 From the top left hamburger menu, locate “Compute” and select “Custom Images” from the
 drop down.Click the blue button and select "Import Image"
 
@@ -261,3 +262,19 @@ drop down.Click the blue button and select "Import Image"
 Select which compartment the image will be created in (if dedicated compartment was created, choose this one). Name the image & Select Linux for the operating system. Paste the Pre-Authenticated Request URL that was copied in the last step into the Object Storage URL field. Leave the default image type (VMDK) and Launch Mode (Paravirtualized). Process will take about 30 minutes to complete.
 
 ![](/Lab100/images/37.png "")
+
+### Step 2: Create Instance with Custom Image
+
+Click "Compute" -> "Instances." Click “Create Instance”, then “Change Image Source”, then “Custom Images”, and select the osCommerce custom image.
+
+![](/Lab100/images/38.png "")
+
+In “Configuring Network,” select the VCN created earlier and subnet. Make sure you click on the button for “Assign a public IP address”. Click the “Create” blue button at bottom of screen to create the instance.
+
+![](/Lab100/images/39.png "")
+
+Next, browse for your public SSH key on your computer. Drag and drop that public SSH key file. Locate this file to drop the public key, ‘.pub’ or paste the contents of the key.
+
+![](/Lab100/images/39.png "")
+
+### Step 3: Connect to Instance and Validate that it's Online 
