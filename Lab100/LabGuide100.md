@@ -167,3 +167,6 @@ sudo chmod 644 /var/www/html/catalog/admin/includes/configure.php
 ```
 
 ### Step 4: Configure osCommerce for End User Use
+Type localhost/catalog/admin in the address bar of the firefox browser you had open earlier. You'll need to log in with the admin username and password that you entered when setting up your osCommerce Online Store Settings. After logging in you'll be redirected to a page that looks similar to the second photo below.
+![](/Lab100/images/13.png "")
+![](/Lab100/images/14.png "")
