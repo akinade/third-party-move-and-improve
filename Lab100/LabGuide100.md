@@ -206,19 +206,30 @@ You should expect to see a .vmdk file after it unzips.
 
 Login to your Oracle Cloud tenancy and in the top left hamburger menu you will find
 “Networking.” Choose “Virtual Cloud Networks” from the list.
+
 ![](/Lab100/images/22.png "")
 
 Select the option “Create Virtual Cloud Network.”
+
 ![](/Lab100/images/23.png "")
 
 Select the option “Create Virtual Cloud Network Plus Related Resources.” This will generate the required resources for a publicly accessible subnet including default route tables, internet gateways, and security lists. All pre-generated resources will be displayed, e.g. “Create Internet Gateway.” Be choosing the related resources option we minimize additional config.
+
 ![](/Lab100/images/24.png "")
 
 **Security List Config**
+
 It's vitally important that we lock down this application as malicious third parties will exploit open ports if not configured correctly. In this instance the we need to set security list ingress and egress rules to control the types of traffic allowed in and out or the subnet- and OSCommerce instance. Specifically:
 *	Allow Port 22 for SSH and 443 for HTTPS
 *	Allow port 3306 for mysql
 
 For production instances **never** open up all traffic via 0.0.0.0/0 on a given port. This will make your application extremely vulnerable to third party attackers. In this lab we will do this for the sake of easy configuration but it is highly recommended that after the lab you lock these ports down.
+
 ![](/Lab100/images/25.png "")
 ![](/Lab100/images/26.png "")
+
+### Step 2: Create Object Storage Bucket
+From the top left hamburger menu, expand the list and find “Object Storage.” Select Object
+Storage from the secondary list and choose "create bucket"
+
+![](/Lab100/images/27.png "")
