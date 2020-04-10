@@ -170,3 +170,28 @@ sudo chmod 644 /var/www/html/catalog/admin/includes/configure.php
 Type localhost/catalog/admin in the address bar of the firefox browser you had open earlier. You'll need to log in with the admin username and password that you entered when setting up your osCommerce Online Store Settings. After logging in you'll be redirected to a page that looks similar to the second photo below.
 ![](/Lab100/images/13.png "")
 ![](/Lab100/images/14.png "")
+
+**Create a New Manufacturer, Category & Product**
+When logged in, click on “Catalog” on the right-hand menu and click on “Manufactures”. On the next page, click on “Insert” and proceed to enter “Oracle” as the Manufacturer Name and upload an image of the Oracle logo (you can download one by using the firefox browser and saving it locally).  Click save when complete. You will then see Oracle as a listed Manufacturer with the image you uploaded.
+![](/Lab100/images/15.png "")
+
+Go to “Categories/Products” then “Hardware”, click “New Category”, and name it ‘Oracle Hardware’. Upload an image of the Oracle logo and click save when complete.
+![](/Lab100/images/16.png "")
+
+Go to “Categories/Products” then “Hardware”, click ‘Oracle Hardware’, then click ‘New Product’, and fill out the fields. Download an image, from the browser, of the product and save it to the pictures folder, to then attach to the new product. We selected ‘Oracle Exadata’ as our product.
+![](/Lab100/images/17.png "")
+
+Navigate to localhost/catalog/index.php. This is what you should see as a final product:
+![](/Lab100/images/18.png "")
+
+### Step 5: Export .Ova File From VirtualBox & Extract VMDK
+From VirtualBox, shut down the osCommerce image (quitting out will also do this). Export the appliance from VirtualBox. Copy as seen in the image and set the file location for the .ova export. Keep in mind of the directory you are exporting to. Export will take about 5 minutes.
+![](/Lab100/images/19.png "")
+![](/Lab100/images/20.png "")
+
+Open a Terminal window (on your local machine, **NOT in Virtualbox**)  and change directories to where the .ova file was exported. The pwd command was used to show you the current directory that terminal was in. Use the command below to unzip the .ova file:
+```
+tar -xvf [.ova file]
+```
+You should expect to see a .vmdk file after it unzips.
+![](/Lab100/images/21.png "")
