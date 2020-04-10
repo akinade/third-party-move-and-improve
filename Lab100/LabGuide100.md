@@ -230,6 +230,25 @@ For production instances **never** open up all traffic via 0.0.0.0/0 on a given 
 
 ### Step 2: Create Object Storage Bucket
 From the top left hamburger menu, expand the list and find “Object Storage.” Select Object
-Storage from the secondary list and choose "create bucket"
+Storage from the secondary list and choose "create bucket." Enter a name for the bucket and click create Bucket with default settings for storage tier and encryption.
 
 ![](/Lab100/images/27.png "")
+![](/Lab100/images/28.png "")
+![](/Lab100/images/29.png "")
+
+### Step 3: Upload VMDK File to Bucket & Create PAR
+Select the bucket you created and then click the blue bottom within Objects named “Upload Objects.” Click “select files” and then locate the .vmdk file created previously from the unzipped .ova
+
+![](/Lab100/images/30.png "")
+![](/Lab100/images/31.png "")
+
+Click the three dots next to the .vmdk file and select Create Pre-Authenticated Request. Leave the default selections and click Create Pre-Authenticated Request. If you would like this PAR to exist for an extended period of time, adjust expiration date accordingly.
+
+![](/Lab100/images/32.png "")
+![](/Lab100/images/33.png "")
+
+Copy the pre-authenticated request URL. This will be used later when creating the custom image.
+
+![](/Lab100/images/34.png "")
+
+## Part 3: Create Custom Image and Instance
