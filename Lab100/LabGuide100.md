@@ -39,7 +39,7 @@ If you you would like to increase the desktop view of the VirtualBox, click on t
 ![](/Lab100/images/5.png "")
 ![](/Lab100/images/6.png "")
 
-### Step 2. Install and Setup LAMP (Linux, Apache, MySQL, PHP) & SSH
+### Step 2: Install and Setup LAMP (Linux, Apache, MySQL, PHP) & SSH
 **Verify Internet Connection**
 
 Before installing any of the packages on the Ubuntu image on VirtualBox, make sure that you are connected to the public internet. Shut down the virtual machine, then disable/turn off any VPN applications/programs, then start up the Ubuntu Virtual machine. This will allow the Ubuntu Virtual Machine to download and install Linux packages.
@@ -189,6 +189,7 @@ Navigate to localhost/catalog/index.php. This is what you should see as a final 
 ### Step 5: Export .Ova File From VirtualBox & Extract VMDK
 
 From VirtualBox, shut down the osCommerce image (quitting out will also do this). Export the appliance from VirtualBox. Copy as seen in the image and set the file location for the .ova export. Keep in mind of the directory you are exporting to. Export will take about 5 minutes.
+
 ![](/Lab100/images/19.png "")
 ![](/Lab100/images/20.png "")
 
@@ -198,3 +199,26 @@ tar -xvf [.ova file]
 ```
 You should expect to see a .vmdk file after it unzips.
 ![](/Lab100/images/21.png "")
+
+## Part 2. Bringing Snapshot to the Cloud
+### Step 1: Create a Virtual Cloud Network (VCN)
+**Note: If you so choose it may make sense to organize resources in a dedicated “OSCommerce” compartment. This is at the customer’s discretion, but if so choose Identity->Compartments->Create Compartment. This will be the compartment where all resources for the lab will be housed.**
+
+Login to your Oracle Cloud tenancy and in the top left hamburger menu you will find
+“Networking.” Choose “Virtual Cloud Networks” from the list.
+![](/Lab100/images/22.png "")
+
+Select the option “Create Virtual Cloud Network.”
+![](/Lab100/images/23.png "")
+
+Select the option “Create Virtual Cloud Network Plus Related Resources.” This will generate the required resources for a publicly accessible subnet including default route tables, internet gateways, and security lists. All pre-generated resources will be displayed, e.g. “Create Internet Gateway.” Be choosing the related resources option we minimize additional config.
+![](/Lab100/images/24.png "")
+
+**Security List Config**
+It's vitally important that we lock down this application as malicious third parties will exploit open ports if not configured correctly. In this instance the we need to set security list ingress and egress rules to control the types of traffic allowed in and out or the subnet- and OSCommerce instance. Specifically:
+*	Allow Port 22 for SSH and 443 for HTTPS
+*	Allow port 3306 for mysql
+
+For production instances **never** open up all traffic via 0.0.0.0/0 on a given port. This will make your application extremely vulnerable to third party attackers. In this lab we will do this for the sake of easy configuration but it is highly recommended that after the lab you lock these ports down.
+![](/Lab100/images/25.png "")
+![](/Lab100/images/26.png "")
