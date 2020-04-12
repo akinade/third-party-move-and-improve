@@ -1,4 +1,4 @@
-# Lab 100: Integrate Oracle Cloud Platform service with your app
+# Lab 300: Integrate Oracle Cloud Platform services with your app
 
 ## Introduction
 This lab walks you through the steps to integrate your third party app with Oracle Cloud PaaS. First, we will connect MySQL database and then Oracle Autonomous Data warehouse to Oracle Integration Cloud. After both the connections has been established, we will migrate the data from MySQL database to Oracle Autonomous Datawarehouse. Lastly, we will connect Oracle Analytics Cloud service to Oracle Autonomous Data warehouse to perform some analytics. 
