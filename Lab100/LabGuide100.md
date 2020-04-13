@@ -352,8 +352,9 @@ Before we begin configuring our new xstartup file, let's back up the original in
 ```
 mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
 nano ~/.vnc/xstartup
+```
 
-
+```
 #!/bin/bash
 [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources xsetroot -solid grey
 vncconfig -iconic &
@@ -373,7 +374,9 @@ Save the file once the commands are properly pasted in. Press Control+X to save.
 To easily control our new VNC server, we should set it up as an Ubuntu service. This will allow us to start, stop, and restart our VNC server as needed. First, open a new service file in /etc/init.d with nano and copy the following code into the file (reference screenshot).
 ```
 sudo nano /etc/init.d/vncserver
+```
 
+```
 #!/bin/bash PATH="$PATH:/usr/bin/" export USER="oscommerce" DISPLAY="1"
 DEPTH="16" GEOMETRY="1024x768"
 OPTIONS="-depth ${DEPTH} -geometry ${GEOMETRY} :${DISPLAY} -localhost"
