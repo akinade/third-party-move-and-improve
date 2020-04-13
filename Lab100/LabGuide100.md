@@ -294,6 +294,7 @@ ssh –i <private_key_name> oscommerce@<public-ip-address>
 Where private_key_name is the key linked to the instance and the public IP address can be pulled from the OCI console. The default password is *oscommerce*.
 
 **Enable SSH and Disable Password Access**
+
 From the connected instance open the sshd_config file (see command). Enter your administrative login password when prompted:
 ```
 sudo nano /etc/ssh/sshd_config
@@ -303,3 +304,59 @@ Remove the "#" sign at the start of the PasswordAuthentication label and replace
 
 Find the “UsePAM” label, and then replace "Yes" with "No" so that the line reads: UsePAM no
 ![](/Lab100/images/42.png "")
+
+Run the following commands to save the file, restart the server and create the appropriate directories:
+```
+sudo service ssh restart
+mkdir ~/.ssh
+touch ~/.ssh/authorized_keys
+```
+
+Open the authorized_keys file and past your public key. Make sure to save and exit. Change permissions on the file:
+```
+sudo 600 authorized_keys
+```
+
+**Install Desktop Environment and VNC Server**
+
+We can get the XFCE packages, along with the package for TightVNC, directly from Ubuntu's software repositories using apt:
+```
+sudo apt-get install xfce4 xfce4-goodies tightvncserver gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
+```
+Once the above command finishes, you will need to complete the VNC server's initial configuration. Enter the command:
+```
+vncserver
+```
+
+When prompted with “You will require a password to access your desktops”, put in a new password. We will use this new password when connecting to our instance via VNC Viewer. Select “n” when prompted “Would you like to enter a view-only password.”
+![](/Lab100/images/42.png "")
+
+Vncserver completes the installation of VNC by creating default configuration files and connection information for our server to use. With these packages installed, you are ready to configure your VNC server and graphical desktop.
+
+**Configure VNC Server**
+
+First, we need to tell our VNC server what commands to perform when it starts up. These commands are located in a configuration file called xstartup. Our VNC server has an xstartup file preloaded already, but we need to use some different commands for our XFCE desktop.
+
+When VNC is first set up, it launches a default server instance on port 5901. This port is called a display port, and is referred to by VNC as :1. VNC can launch multiple instances on other display ports, like :2, :3, etc. When working with VNC servers, remember that :X is a display port that refers to 5900+X.
+
+Since we are going to be changing how our VNC servers are configured, we'll need to first stop the VNC server instance that is running on port 5901:
+```
+vncserver -kill :1
+```
+
+Before we begin configuring our new xstartup file, let's back up the original in case we need it later. After we'll open the file itself and insert commands to be started automatically:
+```
+mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
+nano ~/.vnc/xstartup
+------------
+
+#!/bin/bash
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources xsetroot -solid grey
+vncconfig -iconic &
+x-terminal-emulator -geometry 80x24+10+10 -ls -title “$VNCDESKTOP Desktop” &
+x-window-manager &
+
+gnome-panel &
+gnome-settings-daemon & metacity &
+nautilus &
+```
