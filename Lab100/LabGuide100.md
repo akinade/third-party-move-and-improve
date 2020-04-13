@@ -275,6 +275,31 @@ In “Configuring Network,” select the VCN created earlier and subnet. Make su
 
 Next, browse for your public SSH key on your computer. Drag and drop that public SSH key file. Locate this file to drop the public key, ‘.pub’ or paste the contents of the key.
 
-![](/Lab100/images/39.png "")
+![](/Lab100/images/40.png "")
 
-### Step 3: Connect to Instance and Validate that it's Online 
+If you need to generate an SSH key pair, use the command below and follow on screen instructions for:
+```
+ssh-keygen -t rsa -N "" -b "2048"
+```
+Press ‘Enter’ key for default file location. For Mac users, most likely, your public SSH key can be found in Users/<your name>/.ssh. If you cannot find this directory because it is hidden, run the following command to open the ssh folder:
+```
+open . ~/.ssh
+```
+
+### Step 3: Connect to Instance and Validate that it's Online
+After the instance has been created, open terminal on your local machine and run this command to connect via SSH:
+```
+ssh –i <private_key_name> oscommerce@<public-ip-address>
+```
+Where private_key_name is the key linked to the instance and the public IP address can be pulled from the OCI console. The default password is *oscommerce*.
+
+**Enable SSH and Disable Password Access**
+From the connected instance open the sshd_config file (see command). Enter your administrative login password when prompted:
+```
+sudo nano /etc/ssh/sshd_config
+```
+Remove the "#" sign at the start of the PasswordAuthentication label and replace "Yes" with "No." The line should read PasswordAuthentication no.
+![](/Lab100/images/41.png "")
+
+Find the “UsePAM” label, and then replace "Yes" with "No" so that the line reads: UsePAM no
+![](/Lab100/images/42.png "")
