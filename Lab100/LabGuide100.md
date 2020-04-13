@@ -22,6 +22,7 @@ Estimated time to complete this lab is three hours.
 * To learn about Object Storage in the cloud please see the following [link](https://docs.cloud.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm)
 
 ## Part 1. Capturing a Snapshot of Third Party OS Commerce Application
+
 ### Step 1: Download VirtualBox and Import Ubuntu Instance
 If you do not have it on your local machine, make sure to download [VirtualBox](https://www.virtualbox.org/wiki/Downloads). VirtualBox is a free, open-source software that allows users to run multiple operating systems on a single machine and switch between OS Instances. Additionally, download the osCommerceDemo.ova file that will be provided to you by your lab facilitator.
 ![](/Lab100/images/1.png "")
@@ -201,6 +202,7 @@ You should expect to see a .vmdk file after it unzips.
 ![](/Lab100/images/21.png "")
 
 ## Part 2. Bringing Snapshot to the Cloud
+
 ### Step 1: Create a Virtual Cloud Network (VCN)
 **Note: If you so choose it may make sense to organize resources in a dedicated “OSCommerce” compartment. This is at the customer’s discretion, but if so choose Identity->Compartments->Create Compartment. This will be the compartment where all resources for the lab will be housed.**
 
@@ -252,6 +254,7 @@ Copy the pre-authenticated request URL. This will be used later when creating th
 ![](/Lab100/images/34.png "")
 
 ## Part 3: Create Custom Image and Instance
+
 ### Step 1: Import the image
 From the top left hamburger menu, locate “Compute” and select “Custom Images” from the
 drop down.Click the blue button and select "Import Image"
@@ -345,6 +348,7 @@ vncserver -kill :1
 ```
 
 Before we begin configuring our new xstartup file, let's back up the original in case we need it later. After we'll open the file itself with nano. Insert commands in the file so that they'll be run automatically.
+
 ```
 mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
 nano ~/.vnc/xstartup
