@@ -97,17 +97,21 @@ sudo service apache2 restart
 **Configure osCommerce Database and User**
 
 Log on to the database as an administrator using the terminal within the VirtualBox environment:
-```mysql -u root -p
+```
+mysql -u root -p
 ```
 Create a database named oscommerce:
-```CREATE DATABASE oscommerce;
+```
+CREATE DATABASE oscommerce;
 ```
 
-create a database user named ```oscommerceuser ```. Replace ```type_password_here ``` with a password of your choice. In this example we used ```oscommerce ``` as our password for the sake of simplicity. Regardless of what you choose it is highly recommended that you **copy down your password** as you will need it for other portions of the lab. Please manually typing the following commands due to the formatting of apostraphes.
-```CREATE USER oscommerceuser@localhost IDENTIFIED BY `type_password_here`;
+create a database user named oscommerceuser . Replace "type_password_here" with a password of your choice. In this example we used *oscommerce*  as our password for the sake of simplicity. Regardless of what you choose it is highly recommended that you **copy down your password** as you will need it for other portions of the lab. Please manually typing the following commands due to the formatting of apostraphes.
+```
+CREATE USER oscommerceuser@localhost IDENTIFIED BY `type_password_here`;
 ```
 grant the user access to the database & flush privileges:
-```GRANT ALL PRIVILEGES ON oscommerce.* TO oscommerceuser@localhost;
+```
+GRANT ALL PRIVILEGES ON oscommerce.* TO oscommerceuser@localhost;
 FLUSH PRIVILEGES;
 ```
 Exit with Control + C
@@ -115,18 +119,21 @@ Exit with Control + C
 **Configure Ubuntu for SSH Connections**
 
 Setup SSH:
-```sudo apt-get install openssh-server sudo
+```
+sudo apt-get install openssh-server sudo
 apt-get install ssh
 ```
 Install the below package to save persistent iptables updates. Select 'Yes' to save Firewall rules.
 ```sudo apt-get install iptables-persistent
 ```
 allow SSH Connection:
-```sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+```
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 ```
 Check your iptables is updated with SSH access rules & save the updated rules:
-```sudo iptables -L
+```
+sudo iptables -L
 sudo invoke-rc.d iptables-persistent save
 ```
 ![](/Lab100/images/8.png "")
@@ -135,16 +142,19 @@ sudo invoke-rc.d iptables-persistent save
 **Download OSCommerce**
 
 Make a temporary folder named “tmp” where you will download osCommerce to. Download the zip and extract:
-```mkdir tmp
+```
+mkdir tmp
 cd /tmp/ && wget http://www.oscommerce.com/files/oscommerce-2.3.4.zip
 unzip oscommerce-2.3.4.zip
 ```
 Next, run the commands below to copy osCommerce content to the default root directory for Apache2. You can choose to customize Apache2 root directory, but for this post, we’re going to use the default location which is at /var/www/html
 
-```sudo cp -rf oscommerce-2.3.4/* /var/www/html/
+```
+sudo cp -rf oscommerce-2.3.4/* /var/www/html/
 ```
 Change permissions on the files and give apache2 ownership of the root directory. Restart Apache:
-```sudo chmod 777 /var/www/html/catalog/includes/configure.php
+```
+sudo chmod 777 /var/www/html/catalog/includes/configure.php
 sudo chmod 777 /var/www/html/catalog/admin/includes/configure.php
 sudo chown www-data:www-data -R /var/www/html/
 sudo service apache2 start
@@ -163,7 +173,8 @@ Finally, set the OSCommerce online store settings info. We recommend that you ma
 ![](/Lab100/images/12.png "")
 
 After installation, remove the installation directory to protect your site and change the permissions on sensitive files:
-```sudo rm -rf /var/www/html/catalog/install
+```
+sudo rm -rf /var/www/html/catalog/install
 sudo chmod 644 /var/www/html/catalog/includes/configure.php
 sudo chmod 644 /var/www/html/catalog/admin/includes/configure.php
 ```
@@ -195,7 +206,8 @@ From VirtualBox, shut down the osCommerce image (quitting out will also do this)
 ![](/Lab100/images/20.png "")
 
 Open a Terminal window (on your local machine, **NOT in Virtualbox**)  and change directories to where the .ova file was exported. The pwd command was used to show you the current directory that terminal was in. Use the command below to unzip the .ova file:
-```tar -xvf [.ova file]
+```
+tar -xvf [.ova file]
 ```
 You should expect to see a .vmdk file after it unzips.
 ![](/Lab100/images/21.png "")
@@ -280,22 +292,26 @@ Next, browse for your public SSH key on your computer. Drag and drop that public
 ![](/Lab100/images/40.png "")
 
 If you need to generate an SSH key pair, use the command below and follow on screen instructions for:
-```ssh-keygen -t rsa -N "" -b "2048"
+```
+ssh-keygen -t rsa -N "" -b "2048"
 ```
 Press ‘Enter’ key for default file location. For Mac users, most likely, your public SSH key can be found in Users/<your name>/.ssh. If you cannot find this directory because it is hidden, run the following command to open the ssh folder:
-```open . ~/.ssh
+```
+open . ~/.ssh
 ```
 
 ### Step 3: Connect to Instance and Validate that it's Online
 After the instance has been created, open terminal on your local machine and run this command to connect via SSH:
-```ssh –i <private_key_name> oscommerce@<public-ip-address>
+```
+ssh –i <private_key_name> oscommerce@<public-ip-address>
 ```
 Where private_key_name is the key linked to the instance and the public IP address can be pulled from the OCI console. The default password is *oscommerce*.
 
 **Enable SSH and Disable Password Access**
 
 From the connected instance open the sshd_config file (see command). Enter your administrative login password when prompted:
-```sudo nano /etc/ssh/sshd_config
+```
+sudo nano /etc/ssh/sshd_config
 ```
 Remove the "#" sign at the start of the PasswordAuthentication label and replace "Yes" with "No." The line should read PasswordAuthentication no.
 ![](/Lab100/images/41.png "")
@@ -304,19 +320,22 @@ Find the “UsePAM” label, and then replace "Yes" with "No" so that the line r
 ![](/Lab100/images/42.png "")
 
 Run the following commands to save the file, restart the server and create the appropriate directories:
-```sudo service ssh restart
+```
+sudo service ssh restart
 mkdir ~/.ssh
 touch ~/.ssh/authorized_keys
 ```
 
 Open the authorized_keys file and past your public key. Make sure to save and exit. Change permissions on the file:
-```sudo 600 authorized_keys
+```
+sudo 600 authorized_keys
 ```
 
 **Install Desktop Environment and VNC Server**
 
 We can get the XFCE packages, along with the package for TightVNC, directly from Ubuntu's software repositories using apt:
-```sudo apt-get install xfce4 xfce4-goodies tightvncserver gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
+```
+sudo apt-get install xfce4 xfce4-goodies tightvncserver gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
 ```
 Once the above command finishes, you will need to complete the VNC server's initial configuration. Enter the command:
 ```
@@ -335,16 +354,19 @@ First, we need to tell our VNC server what commands to perform when it starts up
 When VNC is first set up, it launches a default server instance on port 5901. This port is called a display port, and is referred to by VNC as :1. VNC can launch multiple instances on other display ports, like :2, :3, etc. When working with VNC servers, remember that :X is a display port that refers to 5900+X.
 
 Since we are going to be changing how our VNC servers are configured, we'll need to first stop the VNC server instance that is running on port 5901:
-```vncserver -kill :1
+```
+vncserver -kill :1
 ```
 
 Before we begin configuring our new xstartup file, let's back up the original in case we need it later. After we'll open the file itself with nano. Insert commands in the file so that they'll be run automatically.
 
-```mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
+```
+mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
 nano ~/.vnc/xstartup
 ```
 
-```#!/bin/bash
+```
+#!/bin/bash
 [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources xsetroot -solid grey
 vncconfig -iconic &
 x-terminal-emulator -geometry 80x24+10+10 -ls -title “$VNCDESKTOP Desktop” &
@@ -361,10 +383,12 @@ Save the file once the commands are properly pasted in. Press Control+X to save.
 **Create a VNC Service File**
 
 To easily control our new VNC server, we should set it up as an Ubuntu service. This will allow us to start, stop, and restart our VNC server as needed. First, open a new service file in /etc/init.d with nano and copy the following code into the file (reference screenshot).
-```sudo nano /etc/init.d/vncserver
+```
+sudo nano /etc/init.d/vncserver
 ```
 
-```#!/bin/bash PATH="$PATH:/usr/bin/" export USER="oscommerce" DISPLAY="1"
+```
+#!/bin/bash PATH="$PATH:/usr/bin/" export USER="oscommerce" DISPLAY="1"
 DEPTH="16" GEOMETRY="1024x768"
 OPTIONS="-depth ${DEPTH} -geometry ${GEOMETRY} :${DISPLAY} -localhost"
 . /lib/lsb/init-functions
@@ -387,7 +411,8 @@ esac exit 0
 
 Once all of those blocks are in your service script, you can hit Ctrl and ‘X’ to exit, press ‘Y’ to
 save and press enter to save and close to the file. To make this service script executable and then to start a new VNC instance run the below commands:
-```sudo chmod +x /etc/init.d/vncserver
+```
+sudo chmod +x /etc/init.d/vncserver
 sudo service vncserver start
 ```
 
@@ -398,7 +423,8 @@ tunnels. If you are using Windows, you could use TightVNC, RealVNC, or UltraVNC.
 First, we need to create an SSH connection on your local computer that securely forwards to the localhost connection for VNC. Open a new terminal window and input this command:
 
 (Remember to replace <username> and <pubic_ip_address> with the username and IP you used to connect to your server via SSH.)
-```ssh -L 5901:127.0.0.1:5901 -N -f -l <username> <public_ip_address>
+```
+ssh -L 5901:127.0.0.1:5901 -N -f -l <username> <public_ip_address>
 ```
 
 If you are using a graphical SSH client, like PuTTY, use <public_ip_address> as the connection IP, and set localhost:5901 as a new forwarded port in the program's SSH tunnel settings. Next, we’ll use VNC Viewer to create a new VNC Server. Create a new connection and set the VNC server to localhost:5901 and set the name to “osCommerce Demo.” Make sure you don't forget that :5901 at the end, as that is the only port that the VNC instance is accessible from. When prompted for a password, use the password that you set earlier. You should see the default desktop!
@@ -408,7 +434,8 @@ oscommerce-VirtualBox:1) In this case it will be port 1 = 5901. If it was :2 the
 
 *Debug*: If the pipe is broken for your local terminal instance. SSH into the ubuntu instance and kill the previous vncserver instance. Replace :1 with the instance number created.
 
-```vncserver -kill :1
+```
+vncserver -kill :1
 ```
 
 ![](/Lab100/images/46.png "")
