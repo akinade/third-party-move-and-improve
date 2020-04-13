@@ -159,7 +159,7 @@ Add ```“DirectoryIndex index.php”```
 
 ### Step 2:Export DNS zone file
 **Prequisite**
-* Register a domain with a domain name registerer e.g godaddy, google-domain 
+* Register a domain,Create sub-domain name with a domain name registerer e.g godaddy, google-domain.
 * I’m using google as my domain name provider 
 
 **DNS will take 4-12hours to propagate **
@@ -242,6 +242,12 @@ In the Create Health Check dialog box, enter the following:
 After the failover policy had been created, we need to attached domain name to the policy 
 
 ![](/Lab200/images/24.png "")
+
+![](/Lab200/images/24-b.png "")
+
+Enter the sub-domain name you created earlier 
+
+![](/Lab200/images/24-c.png "")
 
 With a  web browser, access the oscommerce application using the domain name
 
