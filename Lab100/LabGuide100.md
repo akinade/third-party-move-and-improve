@@ -329,7 +329,7 @@ vncserver
 ```
 
 When prompted with “You will require a password to access your desktops”, put in a new password. We will use this new password when connecting to our instance via VNC Viewer. Select “n” when prompted “Would you like to enter a view-only password.”
-![](/Lab100/images/42.png "")
+![](/Lab100/images/43.png "")
 
 Vncserver completes the installation of VNC by creating default configuration files and connection information for our server to use. With these packages installed, you are ready to configure your VNC server and graphical desktop.
 
@@ -344,7 +344,7 @@ Since we are going to be changing how our VNC servers are configured, we'll need
 vncserver -kill :1
 ```
 
-Before we begin configuring our new xstartup file, let's back up the original in case we need it later. After we'll open the file itself and insert commands to be started automatically:
+Before we begin configuring our new xstartup file, let's back up the original in case we need it later. After we'll open the file itself with nano. Insert commands in the file so that they'll be run automatically.
 ```
 mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
 nano ~/.vnc/xstartup
@@ -360,3 +360,72 @@ gnome-panel &
 gnome-settings-daemon & metacity &
 nautilus &
 ```
+
+Save the file once the commands are properly pasted in. Press Control+X to save. When prompted to “Save modified buffer?”, Press Y. Do not change the name of the file. Press Enter to continue. Your file should look identical to the terminal command below.
+![](/Lab100/images/44.png "")
+
+**Create a VNC Service File**
+
+To easily control our new VNC server, we should set it up as an Ubuntu service. This will allow us to start, stop, and restart our VNC server as needed. First, open a new service file in /etc/init.d with nano and copy the following code into the file (reference screenshot).
+```
+sudo nano /etc/init.d/vncserver
+---------------
+#!/bin/bash PATH="$PATH:/usr/bin/" export USER="oscommerce" DISPLAY="1"
+DEPTH="16" GEOMETRY="1024x768"
+OPTIONS="-depth ${DEPTH} -geometry ${GEOMETRY} :${DISPLAY} -localhost"
+. /lib/lsb/init-functions
+case "$1" in start)
+log_action_begin_msg "Starting vncserver for user '${USER}' on localhost:${DISPLAY}" su ${USER} -c "/usr/bin/vncserver ${OPTIONS}"
+;;
+stop)
+log_action_begin_msg "Stopping vncserver for user '${USER}' on localhost:${DISPLAY}" su ${USER} -c "/usr/bin/vncserver -kill :${DISPLAY}"
+;;
+restart)
+$0 stop
+$0 start
+;;
+esac exit 0
+```
+
+![](/Lab100/images/45.png "")
+
+
+
+Once all of those blocks are in your service script, you can hit Ctrl and ‘X’ to exit, press ‘Y’ to
+save and press enter to save and close to the file. To make this service script executable and then to start a new VNC instance run the below commands:
+```
+sudo chmod +x /etc/init.d/vncserver
+sudo service vncserver start
+```
+
+**Connect to your VNC Desktop**
+
+tunnels. If you are using Windows, you could use TightVNC, RealVNC, or UltraVNC. Mac OS X users can use the built-in Screen Sharing, or can use a cross-platform apps like RealVNC, or VNCViewer. For this lab, we chose to use VNCViewer.
+
+First, we need to create an SSH connection on your local computer that securely forwards to the localhost connection for VNC. Open a new terminal window and input this command:
+
+(Remember to replace <username> and <pubic_ip_address> with the username and IP you used to connect to your server via SSH.)
+```
+ssh -L 5901:127.0.0.1:5901 -N -f -l <username> <public_ip_address>
+```
+
+If you are using a graphical SSH client, like PuTTY, use <public_ip_address> as the connection IP, and set localhost:5901 as a new forwarded port in the program's SSH tunnel settings. Next, we’ll use VNC Viewer to create a new VNC Server. Create a new connection and set the VNC server to localhost:5901 and set the name to “osCommerce Demo.” Make sure you don't forget that :5901 at the end, as that is the only port that the VNC instance is accessible from. When prompted for a password, use the password that you set earlier. You should see the default desktop!
+
+*Important*: On your server it will tell you which port is in use (e.g. New ‘X’ desktop is
+oscommerce-VirtualBox:1) In this case it will be port 1 = 5901. If it was :2 then it will be 5902.
+
+*Debug*: If the pipe is broken for your local terminal instance. SSH into the ubuntu instance and kill the previous vncserver instance. Replace :1 with the instance number created.
+
+```
+vncserver -kill :1
+```
+
+![](/Lab100/images/46.png "")
+
+![](/Lab100/images/47.png "")
+
+**Confirm Customized OsCommerce App is Running**
+
+Open Firefox and enter in “localhost/catalog/index.php”. If you see a similar window as shown in the photo below, you have successfully completed this lab!
+
+![](/Lab100/images/48.png "")
