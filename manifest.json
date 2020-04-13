@@ -1,6 +1,11 @@
 {
     "tutorials": [
         {
+            "title": "Workshop Overview",
+            "publisheddate": "04/13/2020",
+            "filename": "./README.md"
+        },
+        {
             "title": "Lab 100: Lifting A Third Party Application to the Cloud",
             "publisheddate": "04/13/2020",
             "filename": "./Lab100/LabGuide100.md"
