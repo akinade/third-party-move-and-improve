@@ -10,7 +10,7 @@ Attached below is a sample architecture of the final solution:
 
 *Note:* This lab is intended to be a comprehensive full cloud showcase. As such, it is assumed a user going through this workshop will be provisioning resources and creating users from scratch. If you decide to use existing infrastructure or resources, be aware and keep note of your namings so resources don't overlap and conflict.
 
-*Note:* Additionally, as much as possible, do not stray away from the naming conventions used for resources in this worshop. You may run into errors if you do. 
+*Note:* Additionally, as much as possible, do not stray away from the naming conventions used for resources in this worshop. You may run into errors if you do.
 
 ## Objectives
 * Provision custom compute with OSCommerce Image
@@ -30,4 +30,4 @@ Attached below is a sample architecture of the final solution:
 * Please click on the URL to receive your [Free Account](https://myservices.us.oraclecloud.com/mycloud/signup?language=en&sourceType=:ex:tb:::RC_NAMK190227P00084:PredictDemandML_ADW_HOL&SC=:ex:tb:::RC_NAMK190227P00084:PredictDemandML_ADW_HOL&pcode=NAMK190227P00084) and complete all required steps. When you complete the registration process you'll receive a $300 credit that will enable you to complete the lab for free. Additionally, you'll have 1000s of hours left over to continue to explore the Oracle Cloud.
 * Soon after requesting your trial you will receive an activation email. Once that email is received and you have logged in to your environment you can begind the lab.
 
-Access the labs using our web-friendly interface here [PLACEHOLDER FOR SITE](www.oracle.com)  
+Access the labs using our web-friendly interface [here](https://burlingtonsolutionshub.github.io/third-party-move-and-improve/)  
