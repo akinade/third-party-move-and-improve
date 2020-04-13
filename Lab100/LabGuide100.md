@@ -105,7 +105,7 @@ Create a database named oscommerce:
 CREATE DATABASE oscommerce;
 ```
 
-create a database user named oscommerceuser . Replace "type_password_here" with a password of your choice. In this example we used *oscommerce*  as our password for the sake of simplicity. Regardless of what you choose it is highly recommended that you **copy down your password** as you will need it for other portions of the lab. Please manually typing the following commands due to the formatting of apostraphes.
+create a database user named oscommerceuser . Replace "type password here" with a password of your choice. In this example we used *oscommerce*  as our password for the sake of simplicity. Regardless of what you choose it is highly recommended that you **copy down your password** as you will need it for other portions of the lab. Please manually typing the following commands due to the formatting of apostraphes.
 ```
 CREATE USER oscommerceuser@localhost IDENTIFIED BY `type_password_here`;
 ```
@@ -124,7 +124,8 @@ sudo apt-get install openssh-server sudo
 apt-get install ssh
 ```
 Install the below package to save persistent iptables updates. Select 'Yes' to save Firewall rules.
-```sudo apt-get install iptables-persistent
+```
+sudo apt-get install iptables-persistent
 ```
 allow SSH Connection:
 ```
