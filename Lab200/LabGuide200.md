@@ -1,7 +1,7 @@
 # Lab 200: High Availability for the OsCommerce instance by leveraging standby instance
 
 ## Introduction
-Below, we have a demo of how you can setup DR easily in cloud leveraging different availability domains or across regions. One of the key principles of designing high availability solutions is to avoid single point of failure.
+This lab walks you through how you can setup DR easily on Oracle cloud leveraging different availability domains or across regions. One of the key principles of designing high availability solutions is to avoid single point of failure.
  We will deploy Compute instances that perform the same tasks in multiple availability domains. This design removes a single point of failure by introducing redundancy. The following diagram illustrates how we can achieve high availability. 
 
 ![](/Lab200/images/1.png "")
