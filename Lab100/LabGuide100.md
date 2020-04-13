@@ -60,11 +60,17 @@ mysql_secure_installation
 ```
 
 After running the command you will also be asked to answer prompts within the terminal window. Enter the following below where the password is the one you just set:
-```Enter current password for root (enter for none): Type Root Password
+```
+Enter current password for root (enter for none): Type Root Password
+
 Change The Root Password? N
+
 Remove Anonymous Users? Y
+
 Disallow Root Login Remotely? Y
+
 Remove test database and access to it? Y
+
 Reload Privilege Tables now? Y
 ```
 
