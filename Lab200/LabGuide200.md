@@ -247,7 +247,7 @@ With a  web browser, access the oscommerce application using the domain name
 
 Test the failover mechanism by stopping apache2 service on the mater node
 
-Login into the master node and stop apache service 
+Login into the master node and stop apache service
 
 ```sudo service apache2 stop```
 
