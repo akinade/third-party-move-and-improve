@@ -1,0 +1,19 @@
+{
+    "tutorials": [
+        {
+            "title": "Lab 100: Lifting A Third Party Application to the Cloud",
+            "publisheddate": "04/13/2020",
+            "filename": "./Lab100/LabGuide100.md"
+        },
+        {
+            "title": "Lab 200: Use Oracle Machine Learning (OML) to Run a Machine Learning Model and SQL Developer to Grant User Privileges",
+            "publisheddate": "04/13/2020",
+            "filename": "./Lab200/LabGuide200.md"
+        },
+        {
+            "title": "Lab 300: Enabling Oracle Restful Data Services (ORDS) with APEX to Call and Create APIs",
+            "publisheddate": "04/13/2020",
+            "filename": "./Lab300/LabGuide300.md"
+        }
+     ]
+}
