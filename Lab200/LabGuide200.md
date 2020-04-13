@@ -25,6 +25,7 @@ Estimated time to complete this lab is three hours.
 
 ### Step 1: Download and installing rsync
 Download rsync command on both the compute instances as follows:
+
 ```sudo apt-get install rsync```
 
 ### Step 2: Generate ssh key pair 
