@@ -25,13 +25,13 @@ Estimated time to complete this lab is three hours.
 
 ### Step 1: Download VirtualBox and Import Ubuntu Instance
 If you do not have it on your local machine, make sure to download [VirtualBox](https://www.virtualbox.org/wiki/Downloads). VirtualBox is a free, open-source software that allows users to run multiple operating systems on a single machine and switch between OS Instances. Additionally, download the osCommerceDemo.ova file that will be provided to you by your lab facilitator.
-![](/images/1.png "")
+![](./images/1.png "")
 
 Open Virtualbox and click File > Import Applicance. Select the .ova file downloaded earlier.
-![](/images/2.png "")
+![](./images/2.png "")
 
 Double check that your settings match the screenshot below. Once confirmed, click the import button. This process should take approximately 5 minutes.
-![](/images/3.png "")
+![](./images/3.png "")
 
 Once complete, you will see the osCommerceDemo virtual box listed. Hit the Green Start Arrow and you will be prompted with a login screen with username *oscommerce*. the Default password is *oscommerce*. Once logged in you may or may not be prompted to update to Ubuntu 16.04.6. Click on “Don’t Upgrade”. You have now successfully imported Ubuntu to VirtualBox that we will now use to initialize our osCommerce application.
 ![](/Lab100/images/4.png "")
