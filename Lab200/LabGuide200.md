@@ -159,10 +159,10 @@ Add ```“DirectoryIndex index.php”```
 
 ### Step 2:Export DNS zone file
 **Prequisite**
-* Register a domain with a domain name registerer e.g godaddy, goole-domain 
+* Register a domain with a domain name registerer e.g godaddy, google-domain 
 * I’m using google as my domain name provider 
 
-**: DNS will take 4-12hours to propagate 
+**DNS will take 4-12hours to propagate **
 
 ![](/Lab200/images/9.png "")
 
