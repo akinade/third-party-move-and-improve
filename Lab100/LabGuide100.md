@@ -77,7 +77,8 @@ Reload Privilege Tables now? Y
 **Install Apache2**
 
 Run this command within the terminal on the VirtualBox environment:
-```sudo apt-get install apache2
+```
+sudo apt-get install apache2
 ```
 If you direct your browser to localhost you will see the Apache2 placeholder page.
 ![](/Lab100/images/7.png "")
@@ -85,10 +86,12 @@ If you direct your browser to localhost you will see the Apache2 placeholder pag
 **Install PHP5**
 
 Install PHP5 and Apache PHP5 modules with the command below:
-```sudo apt-get install php5 libapache2-mod-php5 php-mysql
+```
+sudo apt-get install php5 libapache2-mod-php5 php-mysql
 ```
 Restart Apache:
-```sudo service apache2 restart
+```
+sudo service apache2 restart
 ```
 
 **Configure osCommerce Database and User**
