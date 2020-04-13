@@ -34,11 +34,11 @@ Double check that your settings match the screenshot below. Once confirmed, clic
 ![](./images/3.png "")
 
 Once complete, you will see the osCommerceDemo virtual box listed. Hit the Green Start Arrow and you will be prompted with a login screen with username *oscommerce*. the Default password is *oscommerce*. Once logged in you may or may not be prompted to update to Ubuntu 16.04.6. Click on “Don’t Upgrade”. You have now successfully imported Ubuntu to VirtualBox that we will now use to initialize our osCommerce application.
-![](/Lab100/images/4.png "")
+![](/./images/4.png "")
 
 If you you would like to increase the desktop view of the VirtualBox, click on the Gear icon on the top right of the Ubuntu instance. When the System Settings window opens, click on Displays. From here click on your preferred resolution and click apply. The resolution will then change. Click on “Keep This Configuration” to save changes. This will give you more screen space in case the default 800x600 (4:3) resolution was too small.
-![](/Lab100/images/5.png "")
-![](/Lab100/images/6.png "")
+![](/./images/5.png "")
+![](/./images/6.png "")
 
 ### Step 2: Install and Setup LAMP (Linux, Apache, MySQL, PHP) & SSH
 **Verify Internet Connection**
@@ -81,7 +81,7 @@ Run this command within the terminal on the VirtualBox environment:
 sudo apt-get install apache2
 ```
 If you direct your browser to localhost you will see the Apache2 placeholder page.
-![](/Lab100/images/7.png "")
+![](/./images/7.png "")
 
 **Install PHP5**
 
@@ -137,7 +137,7 @@ Check your iptables is updated with SSH access rules & save the updated rules:
 sudo iptables -L
 sudo invoke-rc.d iptables-persistent save
 ```
-![](/Lab100/images/8.png "")
+![](/./images/8.png "")
 
 ### Step 3: OSCommerce Setup
 **Download OSCommerce**
@@ -162,16 +162,16 @@ sudo service apache2 start
 ```
 
 Open firefox and navigate to localhost/catalog. You should see the setup wizard; all steps in this installation need to be completed before we can move on. Follow screenshots below to make sure settings are consistent.
-![](/Lab100/images/9.png "")
+![](/./images/9.png "")
 
 Start the new installation and log in to the MySQL database using the credentials cerated earlier. If values differ from those in the screenshot, please make sure you enter them appropriately.
-![](/Lab100/images/10.png "")
+![](/./images/10.png "")
 
 Set where the www address and web server root directory should be saved
-![](/Lab100/images/11.png "")
+![](/./images/11.png "")
 
 Finally, set the OSCommerce online store settings info. We recommend that you make a note of the administrator username and password for later reference.
-![](/Lab100/images/12.png "")
+![](/./images/12.png "")
 
 After installation, remove the installation directory to protect your site and change the permissions on sensitive files:
 ```
@@ -182,36 +182,36 @@ sudo chmod 644 /var/www/html/catalog/admin/includes/configure.php
 
 ### Step 4: Configure osCommerce for End User Use
 Type localhost/catalog/admin in the address bar of the firefox browser you had open earlier. You'll need to log in with the admin username and password that you entered when setting up your osCommerce Online Store Settings. After logging in you'll be redirected to a page that looks similar to the second photo below.
-![](/Lab100/images/13.png "")
-![](/Lab100/images/14.png "")
+![](/./images/13.png "")
+![](/./images/14.png "")
 
 **Create a New Manufacturer, Category & Product**
 
 When logged in, click on “Catalog” on the right-hand menu and click on “Manufactures”. On the next page, click on “Insert” and proceed to enter “Oracle” as the Manufacturer Name and upload an image of the Oracle logo (you can download one by using the firefox browser and saving it locally).  Click save when complete. You will then see Oracle as a listed Manufacturer with the image you uploaded.
-![](/Lab100/images/15.png "")
+![](/./images/15.png "")
 
 Go to “Categories/Products” then “Hardware”, click “New Category”, and name it ‘Oracle Hardware’. Upload an image of the Oracle logo and click save when complete.
-![](/Lab100/images/16.png "")
+![](/./images/16.png "")
 
 Go to “Categories/Products” then “Hardware”, click ‘Oracle Hardware’, then click ‘New Product’, and fill out the fields. Download an image, from the browser, of the product and save it to the pictures folder, to then attach to the new product. We selected ‘Oracle Exadata’ as our product.
-![](/Lab100/images/17.png "")
+![](/./images/17.png "")
 
 Navigate to localhost/catalog/index.php. This is what you should see as a final product:
-![](/Lab100/images/18.png "")
+![](/./images/18.png "")
 
 ### Step 5: Export .Ova File From VirtualBox & Extract VMDK
 
 From VirtualBox, shut down the osCommerce image (quitting out will also do this). Export the appliance from VirtualBox. Copy as seen in the image and set the file location for the .ova export. Keep in mind of the directory you are exporting to. Export will take about 5 minutes.
 
-![](/Lab100/images/19.png "")
-![](/Lab100/images/20.png "")
+![](/./images/19.png "")
+![](/./images/20.png "")
 
 Open a Terminal window (on your local machine, **NOT in Virtualbox**)  and change directories to where the .ova file was exported. The pwd command was used to show you the current directory that terminal was in. Use the command below to unzip the .ova file:
 ```
 tar -xvf [.ova file]
 ```
 You should expect to see a .vmdk file after it unzips.
-![](/Lab100/images/21.png "")
+![](/./images/21.png "")
 
 ## Part 2. Bringing Snapshot to the Cloud
 
@@ -221,15 +221,15 @@ You should expect to see a .vmdk file after it unzips.
 Login to your Oracle Cloud tenancy and in the top left hamburger menu you will find
 “Networking.” Choose “Virtual Cloud Networks” from the list.
 
-![](/Lab100/images/22.png "")
+![](/./images/22.png "")
 
 Select the option “Create Virtual Cloud Network.”
 
-![](/Lab100/images/23.png "")
+![](/./images/23.png "")
 
 Select the option “Create Virtual Cloud Network Plus Related Resources.” This will generate the required resources for a publicly accessible subnet including default route tables, internet gateways, and security lists. All pre-generated resources will be displayed, e.g. “Create Internet Gateway.” Be choosing the related resources option we minimize additional config.
 
-![](/Lab100/images/24.png "")
+![](/./images/24.png "")
 
 **Security List Config**
 
@@ -239,31 +239,31 @@ It's vitally important that we lock down this application as malicious third par
 
 For production instances **never** open up all traffic via 0.0.0.0/0 on a given port. This will make your application extremely vulnerable to third party attackers. In this lab we will do this for the sake of easy configuration but it is highly recommended that after the lab you lock these ports down.
 
-![](/Lab100/images/25.png "")
-![](/Lab100/images/26.png "")
+![](/./images/25.png "")
+![](/./images/26.png "")
 
 ### Step 2: Create Object Storage Bucket
 From the top left hamburger menu, expand the list and find “Object Storage.” Select Object
 Storage from the secondary list and choose "create bucket." Enter a name for the bucket and click create Bucket with default settings for storage tier and encryption.
 
-![](/Lab100/images/27.png "")
-![](/Lab100/images/28.png "")
-![](/Lab100/images/29.png "")
+![](/./images/27.png "")
+![](/./images/28.png "")
+![](/./images/29.png "")
 
 ### Step 3: Upload VMDK File to Bucket & Create PAR
 Select the bucket you created and then click the blue bottom within Objects named “Upload Objects.” Click “select files” and then locate the .vmdk file created previously from the unzipped .ova
 
-![](/Lab100/images/30.png "")
-![](/Lab100/images/31.png "")
+![](/./images/30.png "")
+![](/./images/31.png "")
 
 Click the three dots next to the .vmdk file and select Create Pre-Authenticated Request. Leave the default selections and click Create Pre-Authenticated Request. If you would like this PAR to exist for an extended period of time, adjust expiration date accordingly.
 
-![](/Lab100/images/32.png "")
-![](/Lab100/images/33.png "")
+![](/./images/32.png "")
+![](/./images/33.png "")
 
 Copy the pre-authenticated request URL. This will be used later when creating the custom image.
 
-![](/Lab100/images/34.png "")
+![](/./images/34.png "")
 
 ## Part 3: Create Custom Image and Instance
 
@@ -271,26 +271,26 @@ Copy the pre-authenticated request URL. This will be used later when creating th
 From the top left hamburger menu, locate “Compute” and select “Custom Images” from the
 drop down.Click the blue button and select "Import Image"
 
-![](/Lab100/images/35.png "")
-![](/Lab100/images/36.png "")
+![](/./images/35.png "")
+![](/./images/36.png "")
 
 Select which compartment the image will be created in (if dedicated compartment was created, choose this one). Name the image & Select Linux for the operating system. Paste the Pre-Authenticated Request URL that was copied in the last step into the Object Storage URL field. Leave the default image type (VMDK) and Launch Mode (Paravirtualized). Process will take about 30 minutes to complete.
 
-![](/Lab100/images/37.png "")
+![](/./images/37.png "")
 
 ### Step 2: Create Instance with Custom Image
 
 Click "Compute" -> "Instances." Click “Create Instance”, then “Change Image Source”, then “Custom Images”, and select the osCommerce custom image.
 
-![](/Lab100/images/38.png "")
+![](/./images/38.png "")
 
 In “Configuring Network,” select the VCN created earlier and subnet. Make sure you click on the button for “Assign a public IP address”. Click the “Create” blue button at bottom of screen to create the instance.
 
-![](/Lab100/images/39.png "")
+![](/./images/39.png "")
 
 Next, browse for your public SSH key on your computer. Drag and drop that public SSH key file. Locate this file to drop the public key, ‘.pub’ or paste the contents of the key.
 
-![](/Lab100/images/40.png "")
+![](/./images/40.png "")
 
 If you need to generate an SSH key pair, use the command below and follow on screen instructions for:
 ```
@@ -315,10 +315,10 @@ From the connected instance open the sshd_config file (see command). Enter your 
 sudo nano /etc/ssh/sshd_config
 ```
 Remove the "#" sign at the start of the PasswordAuthentication label and replace "Yes" with "No." The line should read PasswordAuthentication no.
-![](/Lab100/images/41.png "")
+![](/./images/41.png "")
 
 Find the “UsePAM” label, and then replace "Yes" with "No" so that the line reads: UsePAM no
-![](/Lab100/images/42.png "")
+![](/./images/42.png "")
 
 Run the following commands to save the file, restart the server and create the appropriate directories:
 ```
@@ -344,7 +344,7 @@ vncserver
 ```
 
 When prompted with “You will require a password to access your desktops”, put in a new password. We will use this new password when connecting to our instance via VNC Viewer. Select “n” when prompted “Would you like to enter a view-only password.”
-![](/Lab100/images/43.png "")
+![](/./images/43.png "")
 
 Vncserver completes the installation of VNC by creating default configuration files and connection information for our server to use. With these packages installed, you are ready to configure your VNC server and graphical desktop.
 
@@ -379,7 +379,7 @@ nautilus &
 ```
 
 Save the file once the commands are properly pasted in. Press Control+X to save. When prompted to “Save modified buffer?”, Press Y. Do not change the name of the file. Press Enter to continue. Your file should look identical to the terminal command below.
-![](/Lab100/images/44.png "")
+![](/./images/44.png "")
 
 **Create a VNC Service File**
 
@@ -406,7 +406,7 @@ $0 start
 esac exit 0
 ```
 
-![](/Lab100/images/45.png "")
+![](/./images/45.png "")
 
 
 
@@ -439,12 +439,12 @@ oscommerce-VirtualBox:1) In this case it will be port 1 = 5901. If it was :2 the
 vncserver -kill :1
 ```
 
-![](/Lab100/images/46.png "")
+![](/./images/46.png "")
 
-![](/Lab100/images/47.png "")
+![](/./images/47.png "")
 
 **Confirm Customized OsCommerce App is Running**
 
 Open Firefox and enter in “localhost/catalog/index.php”. If you see a similar window as shown in the photo below, you have successfully completed this lab!
 
-![](/Lab100/images/48.png "")
+![](/./images/48.png "")
