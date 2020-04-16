@@ -29,6 +29,9 @@ Download rsync command on both the compute instances as follows:
 ```sudo apt-get install rsync```
 
 ### Step 2: Scp ssh key to primary compute OR Generate ssh key pair
+
+As written in the pre-reqs make sure you have setup ssh access from server 1 to server 2 and vice-versa. If you want to use the same ssh keys as the one you are using to ssh into oscommerce compute, you can scp the private key file from local to primary oscommerce instance by using the following command.
+
 ![](./images/2.png "")
 
 Alternatively, we can use: Method 2 - Create new keys
@@ -55,7 +58,7 @@ Paste your clipboard contents. Rsync is configured to use ssh by default**
 
 ### Step 3: Replicate web server files and database files
 
-Our web server files are located at /var/www/html. Go to server 2 and perform:
+Our web server files are located at /var/www/html. In order to demonstrate replication of web server files from server A to server B, lets delete all the web server files from server B and then set up a replication so both the servers are consistent.
 
 ```sudo rm -rf /var/www/html```
 
@@ -64,6 +67,8 @@ This will delete all the web server files from server 2. Now, go to /var/www fol
 ```sudo mkdir html```
 
 Now give the following permissions to the folder:
+
+Please note: For the purpose of this lab, we are using chmod 777, however setting up 777 permissions is not recommended for production environments. Here, we are using it to quickly demonstrate replication and failover.
 
 ```sudo chmod 777 /var/www/html/```
 
@@ -125,7 +130,9 @@ In my case, the command looked like this:
 
 ```mysqldump --host=150.136.116.169 -P 3306 --user=root -poscommerce --add-drop-table --no-create-db --skip-lock-tables oscommerce | mysql --user=root -poscommerce oscommerce```
 
-Be sure to replace the values above with your actual primary server ip address and user/passwords. Once you’ve verified that this command works, simply run it as a cronjob as we have done with rsync or git. Run ‘crontab -e’, then add your mysqldump command:
+Be sure to replace the values above with your actual primary server ip address and user/passwords. 
+
+For production environments, you can run it as a cronjob. Run ‘crontab -e’, then add your mysqldump command:
 
 ```0 0 * * * mysqldump...```
 
@@ -134,7 +141,6 @@ Be sure to replace the values above with your actual primary server ip address a
 If we go to the second server and check the mysqlData file, we will see the following:
 
 ![](./images/7.png "")
-
 
 Thus, we have the webserver files as well as the database files in a standby server safe and with latest updates. Furthermore, we can setup cron jobs for automation rather than running the commands manually every time.
 
