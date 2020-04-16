@@ -1,19 +1,19 @@
 # Lab 200: High Availability for the OsCommerce instance 
 
 ## Introduction
-Below, we have a demo of how you can setup DR easily in cloud leveraging different availability domains or across regions. One of the key principles of designing high availability solutions is to avoid single point of failure.
- We will deploy Compute instances that perform the same tasks in multiple availability domains. This design removes a single point of failure by introducing redundancy. The following diagram illustrates how we can achieve high availability.
+Below, we have a demo of how you can setup disaster recovery for your app easily in cloud leveraging different availability domains (or across regions). One of the key principles of designing high availability solutions is to avoid single point of failure.
+ We will deploy Compute instances that perform the same tasks in multiple availability domains. You can use the custom image you used for primary compute to deploy secondary compute. This design removes a single point of failure by introducing redundancy. The following diagram illustrates how we can achieve high availability.
 
 ![](./images/1.png "")
 
 ### Objectives
-* Learn how to replicate data across multiple compute instances using Rsync, MySQLdump
+* Learn how to replicate data across multiple compute instances using Rsync, mysqldump utility.
 * Learn how to provision and configure DNS Failover with Traffic Management Steering policy
 
 
 ### Required Artifacts
 * 2 OsCommerce compute servers that both have rsync installed
-* Make sure you have setup ssh access from server 1 to server 2 and vice-versa
+* Make sure you have setup ssh access from local to both the servers and from server 1 to server 2 and vice-versa
 * DNS Zone master file
 
 Estimated time to complete this lab is three hours.
@@ -28,7 +28,7 @@ Download rsync command on both the compute instances as follows:
 
 ```sudo apt-get install rsync```
 
-### Step 2: Generate ssh key pair
+### Step 2: Scp ssh key to primary compute OR Generate ssh key pair
 ![](./images/2.png "")
 
 Alternatively, we can use: Method 2 - Create new keys
@@ -53,7 +53,7 @@ ssh into Server B, and append the contents of that to the it's authorized_keys f
 
 Paste your clipboard contents. Rsync is configured to use ssh by default**
 
-### Step 3: Replace web server files
+### Step 3: Replicate web server files and database files
 
 Our web server files are located at /var/www/html. Go to server 2 and perform:
 
