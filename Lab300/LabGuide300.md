@@ -56,7 +56,7 @@ Host: This will be the public IP to your compute instance
 Port: Use port 3306 since this is a MySQL database
 Database Name: oscommerce. This is the database name we used in Step 2
 Username & Password: Use the credentials that you used in Step 2
-Agent Group: In the Oracle Integration Cloud instance, there will be an Agent Group preconfigured for you. Select that one.
+Agent Group: In the Oracle Integration Cloud instance, there will be an Agent Group preconfigured for you. Select that one. If there is no agent, follow the steps from this [link](https://docs.oracle.com/en/cloud/paas/integration-cloud/integrations-user/agent-download-and-installation.html#GUID-72491B67-7445-4B52-94FA-CEC8488E0F4A) to install a new agent. 
 
 ![](./images/5.png "")
 
@@ -155,7 +155,9 @@ Once you click on Activate, the slider should now be moved to the right and be h
 
 ![](./images/24.png "")
 
-### Step 4: How to perform analytics off of your ADW
+## Part 2. Connect your app to Oracle Analytics Cloud
+
+### Step 1: Create an OAC Instance
 
 Go to cloud.oracle.com, click the Sign In icon to sign in with your Oracle Cloud account. From here, click on Sign in to Cloud
 
@@ -168,8 +170,6 @@ Enter your Cloud Account Name and click on Next
 Enter your Oracle Cloud username and password, and click Sign In
 
 ![](./images/27.png "")
-
-### Step 5: Create an OAC Instance
 
 Once you are logged in, you are taken to the cloud services dashboard where you can see all the services available to you.
 
@@ -198,7 +198,7 @@ Once you click Create, you will be redirected to the first dashboard that lists 
 
 ![](./images/33.png "")
 
-### Step 6: Access your new OAC Instance
+### Step 2: Access your new OAC Instance
 
 Make sure you are on the dashboard for Oracle Analytics cloud. Click on the Hamburger icon on the same line as the instance you recently made. Click on Oracle Analytics Cloud URL. You will then be redirected to the main page for your OAC Instance
 
@@ -210,7 +210,7 @@ When redirected, your page should look similar to the picture below. If you get 
 
 Note: If your page is not loading properly, or you are unable to access this page, disable any AdBlock extensions or programs that are running in the background, and refresh the page.
 
-### Step 7: Connect an ADW/ATP Instance to OAC
+### Step 3: Connect an ADW/ATP Instance to OAC
 
 To connect an ADW instance to OAC, from the dashboard, click on Create. A new window will open, where you will need to select what type of database you are using. In this example, we picked Oracle ADW.
 
