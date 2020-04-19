@@ -42,7 +42,7 @@ Once complete, you will see the osCommerceDemo virtual box listed. Hit the Green
 
 If you you would like to increase the desktop view of the VirtualBox, click on the Gear icon on the top right of the Ubuntu instance. When the System Settings window opens, click on Displays. From here click on your preferred resolution and click apply. The resolution will then change. Click on “Keep This Configuration” to save changes. This will give you more screen space in case the default 800x600 (4:3) resolution was too small.
 
-![](/./images/5.png "")
+![](./images/5.png "")
 
 ![](/./images/6.png "")
 
