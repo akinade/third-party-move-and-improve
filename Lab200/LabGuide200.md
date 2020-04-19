@@ -70,9 +70,10 @@ This will delete all the web server files from secondary server. Now, go to /var
 
 Now give the following permissions to the folder:
 
+```sudo chmod 777 /var/www/html/```
+
 Please note: For the purpose of this lab, we are using chmod 777, however setting up 777 permissions is not recommended for production environments. Here, we are using it to quickly demonstrate replication and failover.
 
-```sudo chmod 777 /var/www/html/```
 
 ![](./images/3.png "")
 
@@ -143,7 +144,7 @@ For production environments, you can run it as a cronjob. Run ‘crontab -e’, 
 
 Thus, we have the webserver files as well as the database files in a secondary server safe and with latest updates. Furthermore, we can setup cron jobs for automation rather than running the rsync and mysqldump commands manually every time.
 
-## Part 2. configure DNS failover
+## Part 2. Configure DNS failover
 At this point of time, our primary server and secondary server are in sync. Lets proceed and configure the failover from the Oracle Cloud console. There are multiple ways to setup a failover like using keepalived, using load balancers and using DNS Traffic Management Steering policies in OCI. For the purpose of this lab, we will use the DNS Traffic Management Steering Policy in OCI.
 
 ### Step 1:Login into both primary and secondary servers
