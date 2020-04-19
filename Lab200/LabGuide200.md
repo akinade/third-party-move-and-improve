@@ -2,7 +2,7 @@
 
 ## Introduction
 Below, we have a demo of how you can setup disaster recovery for your app easily in cloud leveraging different availability domains (or across regions). One of the key principles of designing high availability solutions is to avoid single point of failure.
- We will deploy Compute instances that perform the same tasks in multiple availability domains. You can use the custom image you used for primary compute to deploy secondary compute. This design removes a single point of failure by introducing redundancy. The following diagram illustrates how we can achieve high availability.
+ We will deploy Compute instances that perform the same tasks in multiple availability domains. You can use the custom image you used for primary compute instance to deploy secondary compute instance. This design removes a single point of failure by introducing redundancy. The following diagram illustrates how we can achieve high availability.
 
 ![](./images/1.png "")
 
@@ -14,14 +14,14 @@ Below, we have a demo of how you can setup disaster recovery for your app easily
 ### Required Artifacts
 * 2 OsCommerce compute servers that both have rsync installed
 * Make sure you have setup ssh access from local to both the servers and from server 1 to server 2 and vice-versa
-* DNS Zone master file
+* DNS Zone master file (You will need a domain name)
 
 Estimated time to complete this lab is three hours.
 
 ### Additional Resources
 * To learn about provisioning Networks and Network Security check out this [link](https://docs.cloud.oracle.com/en-us/iaas/Content/Network/Concepts/overview.htm)
 
-## Part 1. Installing rsync utility
+## Part 1. Transfer and synchronize webserver files and database files between primary instance and secondary instance.
 
 ### Step 1: Download and installing rsync
 Download rsync command on both the compute instances as follows:
@@ -58,11 +58,13 @@ Paste your clipboard contents. Rsync is configured to use ssh by default**
 
 ### Step 3: Replicate web server files and database files
 
-Our web server files are located at /var/www/html. In order to demonstrate replication of web server files from server A to server B, lets delete all the web server files from server B and then set up a replication so both the servers are consistent.
+Our web server files are located at /var/www/html. In order to demonstrate replication of web server files from primary server to secondary server, lets delete all the web server files from secondary server and then set up a replication from primary server using rsync.
+
+On secondary server, run the following command.
 
 ```sudo rm -rf /var/www/html```
 
-This will delete all the web server files from server 2. Now, go to /var/www folder and create an empty folder:
+This will delete all the web server files from secondary server. Now, go to /var/www folder and create an empty folder:
 
 ```sudo mkdir html```
 
@@ -74,26 +76,28 @@ Please note: For the purpose of this lab, we are using chmod 777, however settin
 
 ![](./images/3.png "")
 
-Now, we will perform the rsync command from server 1 to server 2 to replicate the files. Run the following command on server 1 (primary).
+Now, we will perform the rsync command from primary server to secondary server to replicate the files. Run the following command on server 1 (primary). The ip address below is for the secondary server.
 
 ```rsync -r /var/www/html/ oscommerce@129.146.108.71:/var/www/html/```
 
-If you go to server 2, you can see the following files in the /var/www/html directory
+If you go to secondary server, you can see the following files in the /var/www/html directory
 
 ![](./images/4.png "")
 
-Now that we have successfully replicated the web server files, we can replicate the mysql files as well. We can do this in many ways:
+We have successfully replicated the web server files. Similaryly, we can replicate the mysql files as well. We can do this in many ways:
 * Using rsync as above
 *	Using mysql dump utility
-*	Using Golden Gate image in OCI (Learn more)
+*	Using Golden Gate image in OCI [Learn more](https://blogs.oracle.com/dataintegration/done-cancel-v12)
 
-### Step 3: Replicate mysql files
+
+### Step 3: Replicate mysql database files
 
 Run the following command on primary and backup server:
 
 ```sudo nano /etc/my.cnf```
 
-OR
+
+If the above command does not work, try the following command.
 
 ```sudo nano /etc/mysql/my.cnf```
 
@@ -109,7 +113,7 @@ Restart mysql
 
 ```sudo service mysql restart```
 
-In order for our database in our backup server to communicate to the database in the primary server, do the following in the primary server- Go to mysql terminal by typing:
+In order for our database in our secondary server to communicate to the database in the primary server, do the following in the primary server- Go to mysql terminal by typing:
 
 ```mysql -u root -p```
 
@@ -119,10 +123,9 @@ On mysql terminal, run the following commands:
 
 ```GRANT ALL PRIVILEGES ON *.* TO 'root'@'ip_address';```
 
-**Note: ip_address is the ip address of the backup server**
+**Note: ip_address is the ip address of the secondary server**
 
-
-This command should be run from the secondary server:
+Now, go to the secondary server and run the following command:
 
 ``` mysqldump --host=1.2.3.4 --user=MYDBUSER -pMYDBPASSWORD --add-drop-table --no-create-db --skip-lock-tables MYDBNAME | mysql --user=MYDBUSER -pMYDBPASSWORD MYDBNAME```
 
@@ -138,14 +141,10 @@ For production environments, you can run it as a cronjob. Run ‘crontab -e’, 
 
 ![](./images/6.png "")
 
-If we go to the second server and check the mysqlData file, we will see the following:
-
-![](./images/7.png "")
-
-Thus, we have the webserver files as well as the database files in a standby server safe and with latest updates. Furthermore, we can setup cron jobs for automation rather than running the commands manually every time.
+Thus, we have the webserver files as well as the database files in a secondary server safe and with latest updates. Furthermore, we can setup cron jobs for automation rather than running the rsync and mysqldump commands manually every time.
 
 ## Part 2. configure DNS failover
-Now that we have made sure the files in the 2 web servers are in sync, lets proceed and configure the failover from the Oracle Cloud console. There are multiple ways to setup a failover like using keepalived, using load balancers and using DNS Traffic Management Steering policies in OCI. For the purpose of this lab, we will use the DNS Traffic Management Steering Policy in OCI.
+At this point of time, our primary server and secondary server are in sync. Lets proceed and configure the failover from the Oracle Cloud console. There are multiple ways to setup a failover like using keepalived, using load balancers and using DNS Traffic Management Steering policies in OCI. For the purpose of this lab, we will use the DNS Traffic Management Steering Policy in OCI.
 
 ### Step 1:Login into both primary and secondary servers
 
@@ -163,12 +162,17 @@ Add ```“DirectoryIndex index.php”```
 
 ![](./images/8.png "")
 
+Restart the server using the command
+
+```sudo service apache2 restart```
+
+
 ### Step 2:Export DNS zone file
 **Prequisite**
-* Register a domain,Create sub-domain name with a domain name registerer e.g godaddy, google-domain.
-* I’m using google as my domain name provider
+* For this section of a lab, you will need domain name or a sub-domain. There are many domain name registrars like GoDaddy, NameCheap or Google. 
+* I’m using google as my domain name registrar
 
-**DNS will take 4-12hours to propagate **
+**DNS will take 4-12 hours to propagate **
 
 ![](./images/9.png "")
 
