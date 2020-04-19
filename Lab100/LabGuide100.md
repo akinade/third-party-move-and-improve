@@ -95,6 +95,13 @@ Install PHP5 and Apache PHP5 modules with the command below:
 ```
 sudo apt-get install php5 libapache2-mod-php5 php-mysql
 ```
+
+If the above command doesnt work, use the following command
+```
+sudo apt-get install php5 libapache2-mod-php5 php5-mysql
+```
+
+
 Restart Apache:
 ```
 sudo service apache2 restart
@@ -113,7 +120,7 @@ CREATE DATABASE oscommerce;
 
 create a database user named oscommerceuser . Replace "type password here" with a password of your choice. In this example we used *oscommerce*  as our password for the sake of simplicity. Regardless of what you choose it is highly recommended that you **copy down your password** as you will need it for other portions of the lab. Please manually typing the following commands due to the formatting of apostraphes.
 ```
-CREATE USER oscommerceuser@localhost IDENTIFIED BY `type_password_here`;
+CREATE USER oscommerceuser@localhost IDENTIFIED BY 'type_password_here';
 ```
 grant the user access to the database & flush privileges:
 ```
@@ -170,7 +177,7 @@ sudo service apache2 start
 Open firefox and navigate to localhost/catalog. You should see the setup wizard; all steps in this installation need to be completed before we can move on. Follow screenshots below to make sure settings are consistent.
 ![](/./images/9.png "")
 
-Start the new installation and log in to the MySQL database using the credentials cerated earlier. If values differ from those in the screenshot, please make sure you enter them appropriately.
+Start the new installation and log in to the MySQL database using the credentials created earlier. If values differ from those in the screenshot, please make sure you enter them appropriately.
 ![](/./images/10.png "")
 
 Set where the www address and web server root directory should be saved
