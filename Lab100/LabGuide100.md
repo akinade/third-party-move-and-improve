@@ -200,7 +200,7 @@ Type localhost/catalog/admin in the address bar of the firefox browser you had o
 
 **Create a New Manufacturer, Category & Product**
 
-When logged in, click on “Catalog” on the right-hand menu and click on “Manufactures”. On the next page, click on “Insert” and proceed to enter “Oracle” as the Manufacturer Name and upload an image of the Oracle logo (you can download one by using the firefox browser and saving it locally).  Click save when complete. You will then see Oracle as a listed Manufacturer with the image you uploaded.
+When logged in, click on “Catalog” on the right-hand menu and click on “Manufacturers”. On the next page, click on “Insert” and proceed to enter “Oracle” as the Manufacturer Name and upload an image of the Oracle logo (you can download one by using the firefox browser and saving it locally).  Click save when complete. You will then see Oracle as a listed Manufacturer with the image you uploaded.
 ![](/./images/15.png "")
 
 Go to “Categories/Products” then “Hardware”, click “New Category”, and name it ‘Oracle Hardware’. Upload an image of the Oracle logo and click save when complete.
