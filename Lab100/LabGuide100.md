@@ -418,7 +418,8 @@ restart)
 $0 stop
 $0 start
 ;;
-esac exit 0
+esac
+exit 0
 ```
 
 ![](/./images/45.png "")
