@@ -249,6 +249,7 @@ Select the option “Create Virtual Cloud Network Plus Related Resources.” Thi
 It's vitally important that we lock down this application as malicious third parties will exploit open ports if not configured correctly. In this instance the we need to set security list ingress and egress rules to control the types of traffic allowed in and out or the subnet- and OSCommerce instance. Specifically:
 *	Allow Port 22 for SSH and 443 for HTTPS
 *	Allow port 3306 for mysql
+* Allow Port 5901 for VNC
 
 For production instances **never** open up all traffic via 0.0.0.0/0 on a given port. This will make your application extremely vulnerable to third party attackers. In this lab we will do this for the sake of easy configuration but it is highly recommended that after the lab you lock these ports down.
 
