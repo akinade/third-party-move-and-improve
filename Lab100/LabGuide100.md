@@ -393,7 +393,7 @@ gnome-settings-daemon & metacity &
 nautilus &
 ```
 
-Save the file once the commands are properly pasted in. Press Control+X to save. When prompted to “Save modified buffer?”, Press Y. Do not change the name of the file. Press Enter to continue. Your file should look identical to the terminal command below.
+Save the file once the commands are properly pasted in. Press Control+X to save. When prompted to “Save modified buffer?”, Press Y. Do not change the name of the file. Press Enter to continue. Your file should look identical to the terminal command below. **NOTE: Please confirm that the copy & past reflects the below screenshot**
 ![](/./images/44.png "")
 
 **Create a VNC Service File**
