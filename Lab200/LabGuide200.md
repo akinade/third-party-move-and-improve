@@ -168,14 +168,14 @@ Restart the server using the command
 
 ```sudo service apache2 restart```
 
+### If you already have your DNS Zone within Oracle Cloud Infrastructure, Skip step 2 and step 3
 
 ### Step 2:Export DNS zone file
 **Prequisite**
 
-* **If you already have your DNS Zone within Oracle Cloud Infrastructure, Skip step 2 and Step 3**
 * For this section of a lab, you will need domain name or a sub-domain. There are many domain name registrars like GoDaddy, NameCheap or Google. I’m using google as my domain name registrar for this lab
 
-**Note: DNS will take 4-12 hours to propagate after you make changes**
+* **Note: DNS will take 4-12 hours to propagate after you make changes**
 
 ![](./images/9.png "")
 
@@ -217,18 +217,26 @@ I’m using google-domain in this case. Add name servers to your domain name ser
 
 ### Step 4: Add an "A" record to DNS zone
 
-There are many record types you can add to your zone, depending on your goals for the zone and its DNS management. For this Lab, we would add an “A” record. For more information about record types go to Supported Resource Records
+There are many record types you can add to your zone, depending on your goals for the zone and its DNS management. For this Lab, we would add an “A” record. For more information about record types go to Supported Resource Records (https://docs.cloud.oracle.com/en-us/iaas/Content/DNS/Tasks/managingdnszones.htm)
 
 Navigate back to Oracle cloud console, open the navigation menu. Under Core Infrastructure, go to Networking and click DNS Zone Management.
 
-Click the Zone Name in which you want to add a record. Zone details and a list of records appear.
+Click the Zone Name in which you want to add a record. Zone details and a list of records appear. Click Add Record.
 
-Click Add Record.
-In the Add Record dialog box, select a record type from the drop-down list, and then enter the information for the record. Under ADDRESS, Enter the public address of your primary server   
+In the Add Record dialog box, select a record type from the drop-down list, and then enter the information for the record. Under address, enter the public address of your primary server   
 
 Click Submit.
 
+![](./images/40.png "")
 
+![](./images/41.png "")
+
+![](./images/42.png "")
+
+Once your records have been added, click Publish Changes.
+In the confirmation dialog box, click Publish Changes.
+
+![](./images/43.png "")
 
 ### Step 5: Create a failover traffic steering policy on OCI console
 
@@ -244,7 +252,7 @@ There are other options here so make sure to select “failover”
 
 Configure the answer pools by filling in the name and public ip address of the OsCommerce compute instance. In my case I have a pool of 2 compute instances
 
-**Complete the above step for both Master and Backup node**
+**Complete the above step for both Primary and Secondary servers** : Pool 1 and Pool 2
 
 ![](./images/20.png "")
 
@@ -283,7 +291,7 @@ Test the failover mechanism by stopping apache2 service on the mater node
 
 Login into the master node and stop apache service
 
-```sudo service apache2 stop```
+```sudo /etc/init.d/apache2 stop```
 
 
  check the failover policy overview, the master node’s heath-check status should have changed from “healthy” to “unhealthy “
