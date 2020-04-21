@@ -426,7 +426,7 @@ esac exit 0
 
 
 Once all of those blocks are in your service script, you can hit Ctrl and ‘X’ to exit, press ‘Y’ to
-save and press enter to save and close to the file. To make this service script executable and then to start a new VNC instance run the below commands:
+save and press enter to save and close to the file. **NOTE: Please confirm that the copy & past reflects the above screenshot**. To make this service script executable and then to start a new VNC instance run the below commands:
 ```
 sudo chmod +x /etc/init.d/vncserver
 sudo service vncserver start
