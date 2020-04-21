@@ -402,7 +402,9 @@ sudo nano /etc/init.d/vncserver
 ```
 
 ```
-#!/bin/bash PATH="$PATH:/usr/bin/" export USER="oscommerce" DISPLAY="1"
+#!/bin/bash
+PATH="$PATH:/usr/bin/"
+export USER="oscommerce" DISPLAY="1"
 DEPTH="16" GEOMETRY="1024x768"
 OPTIONS="-depth ${DEPTH} -geometry ${GEOMETRY} :${DISPLAY} -localhost"
 . /lib/lsb/init-functions
