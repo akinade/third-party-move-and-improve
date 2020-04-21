@@ -177,9 +177,6 @@ Restart the server using the command
 
 * **Note: DNS will take 4-12 hours to propagate after you make changes**
 
-![](./images/9.png "")
-
-
 Export the resource record. This file would be exported as a .txt file. Store in a secure location, we would need the file later in the lab
 
 ![](./images/10.png "")
@@ -187,6 +184,8 @@ Export the resource record. This file would be exported as a .txt file. Store in
 ![](./images/11.png "")
 
 ### Step 3: Create Zone on Oracle Cloud infrastructure
+In this step, you will create a zone. A zone holds the trusted DNS records that will reside on Oracle Cloud Infrastructure’s nameservers.
+
 Navigate back to OCI console to create a zone using the exported file
 
 ![](./images/12.png "")
@@ -221,26 +220,33 @@ There are many record types you can add to your zone, depending on your goals fo
 
 Navigate back to Oracle cloud console, open the navigation menu. Under Core Infrastructure, go to Networking and click DNS Zone Management.
 
+![](./images/12.png "")
+
 Click the Zone Name in which you want to add a record. Zone details and a list of records appear. Click Add Record.
 
-In the Add Record dialog box, select a record type from the drop-down list, and then enter the information for the record. Under address, enter the public address of your primary server   
-
-Click Submit.
+![](./images/39.png "")
 
 ![](./images/40.png "")
 
+In the Add Record dialog box, select a record type from the drop-down list, and then enter the information for the record. Under address, enter the public address of your primary server  
+
+Note the "NAME" box, this where you would create a sub-domain name that would be used later in this lab
+
+Click Submit.
+
 ![](./images/41.png "")
+ 
+Once your records have been added, click Publish Changes.
 
 ![](./images/42.png "")
 
-Once your records have been added, click Publish Changes.
 In the confirmation dialog box, click Publish Changes.
 
 ![](./images/43.png "")
 
 ### Step 5: Create a failover traffic steering policy on OCI console
 
-Traffic Management Steering Policies provides automated failover between primary and secondary servers.
+Traffic Management Steering Policies enables you to configure policies to serve intelligent responses to DNS queries, meaning different answers (endpoints) may be served for the query depending on the logic you define in the policy. Traffic Management Steering Policies can account for health of answers to provide failover capabilities
 
 ![](./images/17.png "")
 
@@ -248,15 +254,13 @@ Traffic Management Steering Policies provides automated failover between primary
 
 There are other options here so make sure to select “failover”
 
+Failover policies allow you to prioritize the order in which you want answers served in a policy (for example, Primary and Secondary). Oracle Cloud Infrastructure Health Checks are leveraged to determine the health of answers in the policy. If the Primary Answer is determined to be unhealthy, DNS traffic will automatically be steered to the Secondary Answer.
+
 ![](./images/19.png "")
 
 Configure the answer pools by filling in the name and public ip address of the OsCommerce compute instance. In my case I have a pool of 2 compute instances
 
-**Complete the above step for both Primary and Secondary servers** : Pool 1 and Pool 2
-
 ![](./images/20.png "")
-
-![](./images/21.png "")
 
 Set the priority of the pools you created in the previous step
 Pool Priority: Failover priority rules specify the priority of answers that are served in a policy. If the primary answer is unavailable, traffic is steered to the next answer in the list.
@@ -264,6 +268,9 @@ Pool Priority: Failover priority rules specify the priority of answers that are 
 ![](./images/22.png "")
 
 Create Health Check.
+
+A health check is a test to confirm the availability of backend servers. A health check can be a request or a connection attempt
+
 In the Create Health Check dialog box, enter the following:
 - Health Check Name: The name used for the health check. Avoid entering confidential information.
 - Interval: Select the period of time between health checks of the target.
@@ -275,17 +282,17 @@ In the Create Health Check dialog box, enter the following:
 
 ![](./images/23.png "")
 
-After the failover policy had been created, we need to attached domain name to the policy
+Attached the sub-domain name you create earlier to the policy
 
 ![](./images/24.png "")
 
-![](./images/24-b.png "")
+Once you've created traffic management steering policy, Click on overview.make sure health status are "Healthy"
 
-Enter the sub-domain name you created earlier
+![](./images/44.png "")
 
-![](./images/24-c.png "")
+With a  web browser, access the oscommerce application using the sub-domain name 
 
-With a  web browser, access the oscommerce application using the domain name
+Example: "public1.oscommercesite.com"
 
 Test the failover mechanism by stopping apache2 service on the mater node
 
@@ -293,7 +300,8 @@ Login into the master node and stop apache service
 
 ```sudo /etc/init.d/apache2 stop```
 
+![](./images/45.png "")
 
- check the failover policy overview, the master node’s heath-check status should have changed from “healthy” to “unhealthy “
+Check the failover policy overview, the master node’s heath-check status should have changed from “healthy” to “unhealthy “
 
 ![](./images/25.png "")
