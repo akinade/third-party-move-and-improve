@@ -12,7 +12,7 @@ Below, we have a demo of how you can setup disaster recovery for your app easily
 
 
 ### Required Artifacts
-* 2 OsCommerce compute servers that both have rsync installed
+* 2 OsCommerce compute servers with rsync installed
 * Make sure you have setup ssh access from local to both the servers and from server 1 to server 2 and vice-versa
 * DNS Zone master file (You will need a domain name)
 
@@ -20,6 +20,8 @@ Estimated time to complete this lab is three hours.
 
 ### Additional Resources
 * To learn about provisioning Networks and Network Security check out this [link](https://docs.cloud.oracle.com/en-us/iaas/Content/Network/Concepts/overview.htm)
+
+* To learn about Oracle's DNS and Traffic Management check out this link (https://docs.cloud.oracle.com/en-us/iaas/Content/EdgeServices/overview.htm)
 
 
 ## Part 1. Transfer and synchronize webserver files and database files between primary instance and secondary instance.
@@ -146,11 +148,11 @@ For production environments, you can run it as a cronjob. Run ‘crontab -e’, 
 Thus, we have the webserver files as well as the database files in a secondary server safe and with latest updates. Furthermore, we can setup cron jobs for automation rather than running the rsync and mysqldump commands manually every time.
 
 ## Part 2. Configure DNS failover
-At this point of time, our primary server and secondary server are in sync. Lets proceed and configure the failover from the Oracle Cloud console. There are multiple ways to setup a failover like using keepalived, using load balancers and using DNS Traffic Management Steering policies in OCI. For the purpose of this lab, we will use the DNS Traffic Management Steering Policy in OCI.
+At this point of time, our primary server and secondary server are in sync. Lets proceed and configure the failover from the Oracle Cloud console. There are multiple ways to setup a failover like using keepalived, using load balancers and using DNS Traffic Management Steering policies in OCI. For the purpose of this lab, we will use the DNS Traffic Management Steering Policy in Oracle Cloud Infrastructure.
 
 ### Step 1:Login into both primary and secondary servers
 
-ssh into both computes instances
+ssh into both compute instances
 
 ```ssh oscommerce@<public ip-add>```
 
@@ -173,7 +175,7 @@ Restart the server using the command
 ### Step 2:Export DNS zone file
 **Prequisite**
 
-* For this section of a lab, you will need domain name or a sub-domain. There are many domain name registrars like GoDaddy, NameCheap or Google. I’m using google as my domain name registrar for this lab
+* For this section of a lab, you will need domain name. There are many domain name registrars like GoDaddy, NameCheap or Google. we are using google as my domain name registrar for this lab
 
 * **Note: DNS will take 4-12 hours to propagate after you make changes**
 
@@ -199,7 +201,7 @@ Navigate into the zone you just created
 
 ![](./images/14.png "")
 
-To make your Oracle Cloud Infrastructure hosted zone accessible through the internet, you must delegate your domain with your domain's registrar. to do that-
+To make your Oracle Cloud Infrastructure hosted zone accessible through the internet, you must delegate your domain with your domain's registrar. to do that:
 
 Open the navigation menu. Under Core Infrastructure, go to Networking and click DNS Zone Management. Click the Zone Name for the zone you want to delegate.
 
